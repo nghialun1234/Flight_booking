@@ -37,6 +37,15 @@ public class DBContext {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
     public static void main(String[] args) {
         DBContext db = new DBContext();
         Connection cnn = db.connection;

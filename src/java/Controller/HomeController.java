@@ -5,6 +5,7 @@
 
 package Controller;
 
+import DAL.DBControl;
 import Model.Airport;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,13 +61,17 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //take today date
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date Today = new Date();
-        String today = format.format(Today);
+        String today = format.format(Today);        
         request.setAttribute("today", today);
-        Airport a = new Airport();
-        ArrayList<Airport> data = a.getAirportList();
-        request.setAttribute("data", data);        
+        //take airport list from db
+        DBControl db = new DBControl();
+        ArrayList<Airport> data = db.getAirportList();
+        request.setAttribute("data", data);
+        HttpSession sa = request.getSession();
+        //forward
         request.getRequestDispatcher("Home_booking.jsp").forward(request, response);
     } 
 
@@ -79,7 +85,6 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 

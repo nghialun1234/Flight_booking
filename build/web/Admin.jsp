@@ -55,15 +55,15 @@
             <h2>Hello ${name}</h2><br>        
         <c:choose>
             <c:when test="${lv >= 3}">
-                <p><a href="/Flight_ticket/ManageAdmin">Manage Admin</a></p>
+                <p><a href="/Flight_booking/ManageAdmin">Manage Admin</a></p>
             </c:when>   
         </c:choose> <br>
         <c:choose>
             <c:when test="${lv >= 2}">
-                <p><a href="/Flight_ticket/ManageOrder">Manage Order</a></p>
+                <p><a href="/Flight_booking/ManageOrder">Manage Order</a></p>
             </c:when>   
         </c:choose> <br> 
-        <p><a href="/Flight_ticket/ManageFlight">Manage Flight</a></p><br> 
+        <p><a href="/Flight_booking/ManageFlight">Manage Flight</a></p><br> 
         </div>
         
         

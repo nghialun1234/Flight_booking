@@ -18,7 +18,7 @@ public class Airport extends DBContext{
     String ID, airport, city, country;
 
     public Airport() {
-        connectDB();
+//        connectDB();
     }
 
     public Airport(String ID, String airport, String city, String country) {
@@ -26,7 +26,7 @@ public class Airport extends DBContext{
         this.airport = airport;
         this.city = city;
         this.country = country;
-        connectDB();
+//        connectDB();
     }
 
     public String getID() {
@@ -60,39 +60,39 @@ public class Airport extends DBContext{
     public void setCountry(String country) {
         this.country = country;
     }
-     //Khai bao cac thanh phan xu ly DB
-    Connection cnn;//Ket noi DB
-    PreparedStatement stm;//Thuc hien cac cau lenh sql
-    ResultSet rs;//Luu tru va xu ly du lieu
-    
-    //connect to DB
-    private void connectDB() {
-        cnn = connection;
-        if (cnn != null) {
-            System.out.println("Connect success");
-        } else {
-            System.out.println("Connect fail!");
-        }
-    }
-    
-    //return airport list
-    public ArrayList<Airport> getAirportList() {
-        ArrayList<Airport> data = new ArrayList<Airport>();          
-        try {
-            String strSQL = "select * from Airport";
-            stm = cnn.prepareStatement(strSQL);
-            rs = stm.executeQuery();
-            while (rs.next()) {                
-                String ID = rs.getString(1);
-                String Airport = rs.getString(2);
-                String City = rs.getString(3);
-                String Country = rs.getString(4);
-                Airport a = new Airport(ID, Airport, City, Country);
-                data.add(a);                
-            }
-        } catch (Exception e) {
-            System.out.println("getNameByAccount:" + e.getMessage());
-        }
-        return data;
-    }
+//     //Khai bao cac thanh phan xu ly DB
+//    Connection cnn;//Ket noi DB
+//    PreparedStatement stm;//Thuc hien cac cau lenh sql
+//    ResultSet rs;//Luu tru va xu ly du lieu
+//    
+//    //connect to DB
+//    private void connectDB() {
+//        cnn = connection;
+//        if (cnn != null) {
+//            System.out.println("Connect success");
+//        } else {
+//            System.out.println("Connect fail!");
+//        }
+//    }
+//    
+//    //return airport list
+//    public ArrayList<Airport> getAirportList() {
+//        ArrayList<Airport> data = new ArrayList<Airport>();          
+//        try {
+//            String strSQL = "select * from Airport";
+//            stm = cnn.prepareStatement(strSQL);
+//            rs = stm.executeQuery();
+//            while (rs.next()) {                
+//                String ID = rs.getString(1);
+//                String Airport = rs.getString(2);
+//                String City = rs.getString(3);
+//                String Country = rs.getString(4);
+//                Airport a = new Airport(ID, Airport, City, Country);
+//                data.add(a);                
+//            }
+//        } catch (Exception e) {
+//            System.out.println("getNameByAccount:" + e.getMessage());
+//        }
+//        return data;
+//    }
 }

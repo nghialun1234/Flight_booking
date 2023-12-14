@@ -53,7 +53,7 @@
         <div id="rec">
             <h2>Order complete!</h2>
             Your order ID is : ${OID}<br>
-            <a href="Home">Return to home</a>
+            <a href="home">Return to home</a>
         </div>        
     </body>
 </html>

@@ -77,6 +77,22 @@
                 document.getElementById('f').value = obj1;
                 document.getElementById('t').value = obj2;
             }
+            
+            function showReturn(){
+                var returnDate = document.getElementById('returndate');
+                var date = document.getElementById('date')             
+                returnDate.value=date.min;
+                returnDate.min=date.min;
+                returnDate.disabled=false;    
+            }
+            
+            function hideReturn(){
+                var returnDate = document.getElementById('returndate');      
+                returnDate.value="";
+                returnDate.min="";
+                returnDate.disabled=true;    
+            }
+            
         </script>
     <body>
 
@@ -85,13 +101,25 @@
                 <div class="container">
                     <div class="row">
                         <div class="booking-form">
-                            <form action="SearchFlight" method="post">                                
+                            <form action="SearchFlight" method="post">  
+                                <div class="form-group">
+                                    <div class="form-checkbox">
+                                        <label for="one-way">
+                                            <input type="radio" id="one-way" name="flight-type" checked="true" onclick="hideReturn()">
+                                            <span></span>One way
+                                        </label>
+                                        <label for="roundtrip">
+                                            <input type="radio" id="roundtrip" name="flight-type" onclick="showReturn()">
+                                            <span></span>Round trip
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <span class="form-label">Flying from</span>
                                             <input class="form-control" type="text" placeholder="City or airport"
-                                                   list="browsers" name="From" id='f'>
+                                                   list="browsers" name="From" id='f' required>
 
                                         </div>
                                     </div>
@@ -99,7 +127,7 @@
                                         <div class="form-group">
                                             <span class="form-label">Flying to</span>
                                             <input class="form-control" type="text" placeholder="City or airport"
-                                                   list="browsers" name="To" id='t'>
+                                                   list="browsers" name="To" id='t' required>
                                         </div>
                                     </div>
                                     <datalist id="browsers">
@@ -124,7 +152,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Returning</span>
-                                            <input class="form-control" type='date' id="returndate" name ='returndate' value="${today}" min="${today}" required>
+                                            <input class="form-control" type='date' id="returndate" name ='returndate'  disabled required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -151,7 +179,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">                                    
+                                <div class="row">     
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-btn">
+                                            <form action="home" method="post">
+                                                <button type='button' class="submit-btn" onclick="location.assign('SearchOrder.jsp')">Search order</button> 
+                                            </form>
+                                                                                                                                   
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-md-3">
                                         <div class="form-btn">
                                             <button class="submit-btn">Show flights</button>

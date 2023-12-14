@@ -10,12 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="w3.css">
     </head>
-    <body>
-        <h1>Select Return Flight</h1>
-        <table border="1">
+    <body class="w3-light-blue">
+        <header class="w3-container w3-aqua">
+            <h1 align='center'>Flight booking website</h1>
+        </header>
+        <h2>Select Flight </h2>
+        <table class="w3-table" border="1">
             <tr>
-                <td>ID</td>
+                <td> </td>
                 <td>Airline</td>
                 <td>Departure</td>
                 <td>DepartureTime</td>
@@ -33,16 +37,16 @@
                 <tr>
                     <td>${count}</td>
                     <td>${item.getAirline()}</td>
-                    <td>${item.getDeparture()}</td>
+                    <td>${item.getDepartureDate()}</td>
                     <td>${item.getDepartureTime()}</td>
                     <td>${item.getDeparturePlace()}</td>
-                    <td>${item.getArrival()}</td>
+                    <td>${item.getArrivalDate()}</td>
                     <td>${item.getArrivalTime()}</td>
                     <td>${item.getArrivalPlace()}</td>
                     <td>${item.getEconomy()}</td>
                     <td>${item.getBusiness()}</td>
-                    <td>${item.getCost()}</td>            
-                    <td><a href='SearchFlight&id=${item.getID()}'>Select</a></td>
+                    <td>${item.getCost()}VND</td>            
+                    <td><a href='SearchFlight?id=${item.getID()}&CLASS=${CLASS}&no=${no}'>Select</a></td>
                 </tr>
             </c:forEach>
         </table><br>      

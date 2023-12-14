@@ -5,6 +5,7 @@
 
 package Controller;
 
+import DAL.DBControl;
 import Model.Admin;
 import Model.Airport;
 import Model.Flight;
@@ -63,7 +64,8 @@ public class ManageFlightController extends HttpServlet {
     throws ServletException, IOException {
         Flight f = new Flight();
         Airport a = new Airport();
-        ArrayList<Airport> data2 = a.getAirportList();
+        DBControl db = new DBControl();
+        ArrayList<Airport> data2 = db.getAirportList();
         request.setAttribute("data2", data2);
         if(request.getParameter("mod")!=null && request.getParameter("mod").equals("1")){
             String id = request.getParameter("id");

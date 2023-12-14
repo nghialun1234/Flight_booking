@@ -14,7 +14,7 @@
     </head>
     <body class="w3-light-blue">
         <header class="w3-container w3-aqua">
-            <h1 align='center'>Flight ticket website</h1>
+            <h1 align='center'>Flight booking website</h1>
         </header>
         <h2>Select Flight </h2>
         <table class="w3-table" border="1">
