@@ -37,10 +37,10 @@
                 <tr>
                     <td>${count}</td>
                     <td>${item.getAirline()}</td>
-                    <td>${item.getDepartureDate()}</td>
+                    <td>${item.getDeparture()}</td>
                     <td>${item.getDepartureTime()}</td>
                     <td>${item.getDeparturePlace()}</td>
-                    <td>${item.getArrivalDate()}</td>
+                    <td>${item.getArrival()}</td>
                     <td>${item.getArrivalTime()}</td>
                     <td>${item.getArrivalPlace()}</td>
                     <td>${item.getEconomy()}</td>

@@ -5,6 +5,7 @@
 
 package Controller;
 
+import DAL.DBControl;
 import Model.Flight;
 import Model.OrderF;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -71,24 +74,41 @@ public class SubmitController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int no =Integer.parseInt(request.getParameter("no"));
-//        String name = request.getParameter("name");
+        //return to home page if sesssion run out       
+        if (request.getSession(false) == null) {
+            HomeController hc = new HomeController();
+            hc.doGet(request, response);
+            return;
+        }
+        //get data from session and form
+        DBControl db = new DBControl()
+        HttpSession sa = request.getSession();
+        String CLASS = (String) sa.getAttribute("CLASS");
+        ArrayList<Flight> result = (ArrayList<Flight>) sa.getAttribute("result");
+        int NoT =(int) sa.getAttribute("NoT");
         String number = request.getParameter("number");
-        String id = request.getParameter("id");
-        String CLASS = request.getParameter("CLASS");
+        
+        //generate random order id
         UUID randomUUID = UUID.randomUUID();
         String oID = randomUUID.toString().replaceAll("-", "").substring(0, 12);
-        for(int i=0; i<no;i++){
-            String paraName = String.valueOf(i+1);
+        
+        //add new order, loop for number of ticket
+        for(int i=1; i<=NoT;i++){
+            String paraName = String.valueOf(i);
             String name=request.getParameter(paraName);
-            OrderF o = new OrderF(oID, id, name, number, CLASS);
-            o.add();
-            Flight f = new Flight();
-            f.getFlightByID(id);
-            f.UpdateFlight(CLASS);
+            
+            for(Flight item: result){
+                OrderF o = new OrderF(oID, item.getID(), name, number, CLASS);
+                o.add();
+                
+                f.UpdateFlight(CLASS);
+            }
+            
+            
         }              
         
         request.setAttribute("OID", oID);
+        sa.invalidate();
         request.getRequestDispatcher("Finish.jsp").forward(request, response);
     }
 

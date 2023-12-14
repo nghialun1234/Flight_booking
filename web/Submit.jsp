@@ -80,10 +80,10 @@
         <div id="rec">
                 
             
-            <form action="Submit?id=${id}&CLASS=${CLASS}&no=${no}" method="post">                
-                Phone number:<input name="number"><br>
-                <c:forEach var = "i" begin = "1" end = "${no}">
-                    Name ${i}:<input name="${i}"><br>
+            <form action="Submit" method="post">                
+                Phone number:<input type="number" name="number" required><br>
+                <c:forEach var = "i" begin = "1" end = "${sessionScope.NoT}">
+                    Name ${i}:<input type="text" name="${i}" required><br>
                 </c:forEach>
                     
 

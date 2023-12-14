@@ -108,38 +108,10 @@ public class HomeController extends HttpServlet {
             hc.doGet(request, response);
             return;
         }
-        HttpSession sa = request.getSession();
-        sa.setAttribute("Depa", Depa);
-        sa.setAttribute("Arri", Arri);
-        sa.setAttribute("DATE", DATE);
+        HttpSession sa = request.getSession();        
         sa.setAttribute("CLASS", CLASS);
         sa.setAttribute("NoT", NoT);
-
-        if (request.getParameter("returnDate") != null) {
-            String Return = request.getParameter("returnDate");
-            ArrayList<String> data2 = new ArrayList<>();
-            data2.add(Arri);
-            data2.add(Depa);
-            data2.add(Return);
-            request.setAttribute("data2", data2);
-        }
-//        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-//        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-dd-MM");
-//        String doe="";
-//        try {
-//            doe=format2.format(format1.parse(date));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(EnrollServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-//        Flight f = new Flight();        
-//        ArrayList<String>search = f.searchFlight(Depa, Arri, DATE);
-//        ArrayList<Flight> data = new ArrayList<>();
-//        for (int i=0; i<search.size(); i++) {
-//            Flight temp = new Flight();
-//            temp.getFlightByID(search.get(i));
-//            data.add(temp);
-//        }
+        //get flight info from data
         DBControl db = new DBControl();
         ArrayList<Flight> data = db.searchFlight(Depa, Arri, DATE);
         sa.setAttribute("data", data);
