@@ -32,7 +32,7 @@
                 <td>Cost</td>
             </tr>
             <c:set var="count" value="0"/>
-            <c:forEach items="${data}" var="item">
+            <c:forEach items="${sessionScope.data}" var="item">
                 <c:set var="count" value="${count + 1}"/>
                 <tr>
                     <td>${count}</td>
@@ -46,7 +46,7 @@
                     <td>${item.getEconomy()}</td>
                     <td>${item.getBusiness()}</td>
                     <td>${item.getCost()}VND</td>            
-                    <td><a href='SearchFlight?id=${item.getID()}&CLASS=${CLASS}&no=${no}'>Select</a></td>
+                    <td><a href='SearchFlight?id=${item.getID()}'>Select</a></td>
                 </tr>
             </c:forEach>
         </table><br>      

@@ -7,6 +7,7 @@ package Controller;
 
 import DAL.DBControl;
 import Model.Airport;
+import Model.Flight;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -85,6 +86,71 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //take data from form
+        String Depa = request.getParameter("From");
+        String Arri = request.getParameter("To");
+        String DATE = request.getParameter("date");
+        String CLASS = request.getParameter("class");
+        String flight_type = request.getParameter("flight_type");
+        String NoT = request.getParameter("no");//Number of ticket
+
+//        //test form data
+//        PrintWriter out = response.getWriter();
+//        out.println(Depa);
+//        out.println(Arri);
+//        out.println(DATE);
+//        out.println(CLASS);
+//        out.println(no);
+        //store data in a session
+        //return to home page if sesssion run out       
+        if (request.getSession(false) == null) {
+            HomeController hc = new HomeController();
+            hc.doGet(request, response);
+            return;
+        }
+        HttpSession sa = request.getSession();
+        sa.setAttribute("Depa", Depa);
+        sa.setAttribute("Arri", Arri);
+        sa.setAttribute("DATE", DATE);
+        sa.setAttribute("CLASS", CLASS);
+        sa.setAttribute("NoT", NoT);
+
+        if (request.getParameter("returnDate") != null) {
+            String Return = request.getParameter("returnDate");
+            ArrayList<String> data2 = new ArrayList<>();
+            data2.add(Arri);
+            data2.add(Depa);
+            data2.add(Return);
+            request.setAttribute("data2", data2);
+        }
+//        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-dd-MM");
+//        String doe="";
+//        try {
+//            doe=format2.format(format1.parse(date));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(EnrollServlet.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+//        Flight f = new Flight();        
+//        ArrayList<String>search = f.searchFlight(Depa, Arri, DATE);
+//        ArrayList<Flight> data = new ArrayList<>();
+//        for (int i=0; i<search.size(); i++) {
+//            Flight temp = new Flight();
+//            temp.getFlightByID(search.get(i));
+//            data.add(temp);
+//        }
+        DBControl db = new DBControl();
+        ArrayList<Flight> data = db.searchFlight(Depa, Arri, DATE);
+        sa.setAttribute("data", data);
+        //check and get data if choose round trip  
+        if (flight_type.equals("round")) {
+            String returnDATE = request.getParameter("returndate");
+            sa.setAttribute("returnDATE", returnDATE);
+            ArrayList<Flight> data2 = db.searchFlight(Arri, Depa, returnDATE);
+            sa.setAttribute("data2", data2);
+        }
+        request.getRequestDispatcher("SearchFlight.jsp").forward(request, response);
     }
 
     /** 

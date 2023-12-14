@@ -101,15 +101,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="booking-form">
-                            <form action="SearchFlight" method="post">  
+                            <form action="home" method="post">  
                                 <div class="form-group">
                                     <div class="form-checkbox">
                                         <label for="one-way">
-                                            <input type="radio" id="one-way" name="flight-type" checked="true" onclick="hideReturn()">
+                                            <input type="radio" id="one-way" name="flight_type" value="one" checked="true" onclick="hideReturn()">
                                             <span></span>One way
                                         </label>
                                         <label for="roundtrip">
-                                            <input type="radio" id="roundtrip" name="flight-type" onclick="showReturn()">
+                                            <input type="radio" id="roundtrip" name="flight_type" value="round" onclick="showReturn()">
                                             <span></span>Round trip
                                         </label>
                                     </div>

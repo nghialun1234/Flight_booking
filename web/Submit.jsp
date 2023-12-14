@@ -49,7 +49,7 @@
     </head>
     <body class="w3-light-blue">
         <header class="w3-container w3-aqua">
-            <h1 align='center'>Flight ticket website</h1>
+            <h1 align='center'>Flight Booking website</h1>
         </header>
         <table class="w3-table" border="1">
             <tr>
@@ -63,7 +63,7 @@
                 <td>Class</td>
                 <td>Cost</td>
             </tr>
-            <c:forEach items="${data}" var="f">
+            <c:forEach items="${sessionScope.result}" var="f">
                 <tr>
                     <td>${f.getAirline()}</td>
                     <td>${f.getDeparture()}</td>
@@ -72,7 +72,7 @@
                     <td>${f.getArrival()}</td>
                     <td>${f.getArrivalTime()}</td>
                     <td>${f.getArrivalPlace()}</td>
-                    <td>${CLASS}</td>                
+                    <td>${sessionScope.CLASS}</td>                
                     <td>${f.getCost()}VND</td> 
                 </tr>
             </c:forEach>

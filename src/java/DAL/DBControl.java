@@ -83,4 +83,34 @@ public class DBControl {
         }
         return data;
     } 
+    
+    //search flight by ID
+    public Flight getFlightByID(String fID) {
+        DBconnect();
+        Flight f = new Flight();
+        try {
+            String strSQL = "select * from Flight where FlightID = "+fID;
+            stm = cnn.prepareStatement(strSQL);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String ID= String.valueOf(rs.getInt(1));
+                String airline = rs.getString(2);
+                String departure = String.valueOf(rs.getDate(3));
+                String departureTime = String.valueOf(rs.getTime(4));
+                String departurePlace = rs.getString(5);
+                String arrival = String.valueOf(rs.getDate(6));
+                String arrivalTime = String.valueOf(rs.getTime(7));
+                String arrivalPlace = rs.getString(8);
+                String economy = String.valueOf(rs.getInt(9));
+                String business = String.valueOf(rs.getInt(10));
+                String cost = String.valueOf(rs.getFloat(11));  
+                f = new Flight(ID, airline, departure, departureTime,
+                        departurePlace, arrival, arrivalTime, arrivalPlace,
+                        economy, business, cost);                
+            }
+        } catch (Exception e) {
+            System.out.println("getProductByID:" + e.getMessage());
+        }
+        return f;
+    }
 }

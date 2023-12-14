@@ -12,6 +12,10 @@
         <servlet-name>SearchFlightController</servlet-name>
         <servlet-class>Controller.SearchFlightController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchReturnFlight</servlet-name>
+        <servlet-class>Controller.SearchReturnFlightController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>SearchFlightController</servlet-name>
         <url-pattern>/SearchFlight</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchReturnFlight</servlet-name>
+        <url-pattern>/SearchReturnFlight</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

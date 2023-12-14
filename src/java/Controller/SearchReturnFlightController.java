@@ -4,8 +4,8 @@
  */
 package Controller;
 
+import DAL.DBControl;
 import Model.Flight;
-import Model.OrderF;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name = "SearchResultController", urlPatterns = {"/SearchReturnResult"})
-public class SearchResultController extends HttpServlet {
+@WebServlet(name = "SearchFlightController", urlPatterns = {"/SearchFlight"})
+public class SearchReturnFlightController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +39,15 @@ public class SearchResultController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchResultController</title>");
+            out.println("<title>Servlet SearchFlightController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchResultController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchFlightController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +65,25 @@ public class SearchResultController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("SearchOrder.jsp").forward(request, response);
+        //return to home page if sesssion run out       
+        if (request.getSession(false) == null) {
+            HomeController hc = new HomeController();
+            hc.doGet(request, response);
+            return;
+        }
+        //get data from session and form
+        HttpSession sa = request.getSession();
+        String ID = request.getParameter("id");
+        
+        //get flight and pass to session
+        DBControl db = new DBControl();
+        Flight f = db.getFlightByID(ID);
+        ArrayList<Flight> result = (ArrayList<Flight>) sa.getAttribute("result");
+        result.add(f);
+        sa.setAttribute("result", result);
+        request.getRequestDispatcher("Submit.jsp").forward(request, response);
+        
+
     }
 
     /**
@@ -74,31 +97,7 @@ public class SearchResultController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String text = request.getParameter("text");
-        String search = request.getParameter("search");
-        OrderF o = new OrderF();
-        Flight f = new Flight();
-        if (search.equals("1")) {
-            o.getOrderByID(text);
-            request.setAttribute("o", o);
-            f.getFlightByID(o.getFID());
-            request.setAttribute("f", f);
-            request.setAttribute("test", o.getFID());
-            request.getRequestDispatcher("SearchResult.jsp").forward(request, response);
-        } else {
-            ArrayList<OrderF> data = o.getOrderByNumber(text);
-            request.setAttribute("data", data);
-            ArrayList<Flight> dataF = new ArrayList<>();
-            for (int i = 0; i < data.size(); i++) {
-                String fID = data.get(i).getFID();
-                Flight temp = new Flight();
-                temp.getFlightByID(fID);
-                dataF.add(temp);
-            }
-            request.setAttribute("dataF", dataF);
-            request.getRequestDispatcher("SearchResult2.jsp").forward(request, response);
-        }
-
+        
     }
 
     /**
