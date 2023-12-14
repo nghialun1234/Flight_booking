@@ -130,7 +130,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Number of ticket</span>
-                                            <select class="form-control">
+                                            <select class="form-control" name="no">
                                                 <option value="1">1</option>  
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>

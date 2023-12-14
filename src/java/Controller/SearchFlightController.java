@@ -93,34 +93,42 @@ public class SearchFlightController extends HttpServlet {
         String DATE = request.getParameter("date");
         String CLASS = request.getParameter("class");   
         String no=request.getParameter("no");
-        request.setAttribute("CLASS", CLASS);
-        request.setAttribute("no", no);
-        if(request.getParameter("returnDate")!=null){
-            String Return=request.getParameter("returnDate");
-            ArrayList<String>data2 = new ArrayList<>();
-            data2.add(Arri);
-            data2.add(Depa);
-            data2.add(Return);
-            request.setAttribute("data2", data2);
-        }
-//        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-//        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-dd-MM");
-//        String doe="";
-//        try {
-//            doe=format2.format(format1.parse(date));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(EnrollServlet.class.getName()).log(Level.SEVERE, null, ex);
+        //test form data
+        PrintWriter out = response.getWriter();
+        out.println(Depa);
+        out.println(Arri);
+        out.println(DATE);
+        out.println(CLASS);
+        out.println(no);
+        
+//        request.setAttribute("CLASS", CLASS);
+//        request.setAttribute("no", no);
+//        if(request.getParameter("returnDate")!=null){
+//            String Return=request.getParameter("returnDate");
+//            ArrayList<String>data2 = new ArrayList<>();
+//            data2.add(Arri);
+//            data2.add(Depa);
+//            data2.add(Return);
+//            request.setAttribute("data2", data2);
 //        }
-        Flight f = new Flight();        
-        ArrayList<String>search = f.searchFlight(Depa, Arri, DATE);
-        ArrayList<Flight> data = new ArrayList<>();
-        for (int i=0; i<search.size(); i++) {
-            Flight temp = new Flight();
-            temp.getFlightByID(search.get(i));
-            data.add(temp);
-        }
-        request.setAttribute("data", data);
-        request.getRequestDispatcher("SearchFlight.jsp").forward(request, response);     
+////        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+////        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-dd-MM");
+////        String doe="";
+////        try {
+////            doe=format2.format(format1.parse(date));
+////        } catch (ParseException ex) {
+////            Logger.getLogger(EnrollServlet.class.getName()).log(Level.SEVERE, null, ex);
+////        }
+//        Flight f = new Flight();        
+//        ArrayList<String>search = f.searchFlight(Depa, Arri, DATE);
+//        ArrayList<Flight> data = new ArrayList<>();
+//        for (int i=0; i<search.size(); i++) {
+//            Flight temp = new Flight();
+//            temp.getFlightByID(search.get(i));
+//            data.add(temp);
+//        }
+//        request.setAttribute("data", data);
+//        request.getRequestDispatcher("SearchFlight.jsp").forward(request, response);     
     }
 
     /** 
